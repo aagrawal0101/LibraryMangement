@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryManagement.Common\LibraryManagement.Common.csproj" />
+    <ProjectReference Include="..\LibraryManagement.Mappers\LibraryManagement.Mappers.csproj" />
+    <ProjectReference Include="..\LibraryManager.Context\LibraryManager.Context.csproj" />
+    <ProjectReference Include="..\LibraryModel.Domain\LibraryModel.Domain.csproj" />
+    <ProjectReference Include="..\LibraryModel.Dto\LibraryModel.Dto.csproj" />
+  </ItemGroup>
+
+</Project>
