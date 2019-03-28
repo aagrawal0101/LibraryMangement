@@ -28,56 +28,56 @@ namespace LibraryManagement.Repository
         public async Task<BookDomain> AddNewBook(BookDomain book)
         {
             BookEntity bookEntity = EntityDomainMapper.MapEntityToDomain(book);
-                var GetBookByIds = Context.bookEntity.SingleOrDefault(e => e.BookId.Equals(book.BookId));
-                if (GetBookByIds != null)
-                {
-                    throw new BookIdAlridyPresent(HttpStatusCode.NotFound, "BookIdAlridyPresent", null);
-                }
+            var GetBookByIds = await Context.bookEntity.SingleOrDefaultAsync(e => e.BookId.Equals(book.BookId));
+            if (GetBookByIds != null)
+            {
+                throw new BookIdAlridyPresent(HttpStatusCode.NotFound, "BookIdAlridyPresent", null);
+            }
 
             Context.Database.EnsureCreated();
             Context.bookEntity.Add(bookEntity);
-            Context.SaveChanges();
-       
+            await Context.SaveChangesAsync();
+
             return book;
         }
 
         public async Task<BookEntity> DeleteBookById(int bookId)
         {
-                var GetBookByIds = Context.bookEntity.AsNoTracking().SingleOrDefault(e => e.BookId.Equals(bookId));
-                if (GetBookByIds == null)
-                {
-                    throw new UserIdNotValidException(HttpStatusCode.NotFound, "StudentIdNot Found", null);
-                }
-                Context.bookEntity.Remove(GetBookByIds);
-                Context.SaveChanges();
-                return GetBookByIds;
+            var GetBookByIds = await Context.bookEntity.AsNoTracking().SingleOrDefaultAsync(e => e.BookId.Equals(bookId));
+            if (GetBookByIds == null)
+            {
+                throw new UserIdNotValidException(HttpStatusCode.NotFound, "StudentIdNot Found", null);
+            }
+            Context.bookEntity.Remove(GetBookByIds);
+            await Context.SaveChangesAsync();
+            return GetBookByIds;
         }
 
         public async Task<BookEntity> GetBookById(int bookId)
         {
-                var GetBookByIds = Context.bookEntity.AsNoTracking().SingleOrDefault(e => e.BookId.Equals(bookId));
-                return GetBookByIds;
+            var GetBookByIds = await Context.bookEntity.AsNoTracking().SingleOrDefaultAsync(e => e.BookId.Equals(bookId));
+            return GetBookByIds;
         }
 
         public async Task<List<BookEntity>> GetBookList()
         {
-                var GetBookList = Context.bookEntity.ToList();
-                return GetBookList;
+            var GetBookList = await Context.bookEntity.ToListAsync();
+            return GetBookList;
         }
 
         public async Task<BookDomain> UpdateBookById(BookDomain book)
         {
             BookEntity bookEntity = EntityDomainMapper.MapEntityToDomain(book);
 
-                var GetBookByIds = Context.bookEntity.AsNoTracking().SingleOrDefault(e => e.BookId.Equals(book.BookId));
-                if (GetBookByIds == null)
-                {
-                    throw new UserIdNotValidException(HttpStatusCode.NotFound, "BookIdNot Found", null);
-                }
-                Context.Database.EnsureCreated();
-                Context.bookEntity.Update(bookEntity);
-                Context.SaveChanges();
-                return book;
+            var GetBookByIds = await Context.bookEntity.AsNoTracking().SingleOrDefaultAsync(e => e.BookId.Equals(book.BookId));
+            if (GetBookByIds == null)
+            {
+                throw new UserIdNotValidException(HttpStatusCode.NotFound, "BookIdNot Found", null);
+            }
+            Context.Database.EnsureCreated();
+            Context.bookEntity.Update(bookEntity);
+            await Context.SaveChangesAsync();
+            return book;
         }
 
     }

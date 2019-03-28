@@ -98,7 +98,6 @@ namespace LibraryManagement.Controllers
             {
                 if (!string.IsNullOrEmpty(errorCode))
                 {
-                    // Get the error list from Service json config
                     description = _apiErrorsList[errorCode];
                 }
             }

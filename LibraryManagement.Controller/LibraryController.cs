@@ -20,7 +20,6 @@ namespace LibraryManagement.Controllers
     public class LibraryController : BaseController
     {
         ILibraryManager _libraryManager;
-
         public LibraryController(ILibraryManager libraryManager)
         {
             _libraryManager = libraryManager;
@@ -51,7 +50,6 @@ namespace LibraryManagement.Controllers
                     {
                         msg = CreateResponse(HttpStatusCode.Created, newBookDomain);
                     }
-                  
                 }
 
                 catch (BookIdAlridyPresent ex)
